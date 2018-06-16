@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
 userSchema.methods.protectPassword = async () => {
     const saltRounds = 10;
     try {
-        await bcrypt.hash(password, saltRounds);
+        return await bcrypt.hash(password, saltRounds);
     }
     catch(err) {
         throw new Error(err);
