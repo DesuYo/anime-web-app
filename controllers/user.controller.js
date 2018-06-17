@@ -1,6 +1,5 @@
 const User = require('../models/user.model')
 
-
 module.exports = {
   async signUp (req, res) {
     try {
