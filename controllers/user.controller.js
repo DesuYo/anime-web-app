@@ -1,6 +1,5 @@
 const User = require('../models/user.model')
-const Joi = require('joi')
-const userValidator = require('../validations/user.schema')
+
 
 module.exports = {
   async signUp (req, res) {
