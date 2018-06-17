@@ -20,3 +20,4 @@ userSchema.pre('save', async function () {
 })
 
 module.exports = mongoose.model('User', userSchema)
+
