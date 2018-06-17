@@ -3,4 +3,4 @@ const ctrls = require('../controllers')
 
 module.exports = Router()
   .post('/anime', ctrls.anime.addAnime)
-  .post('/signup', ctrls.user.signUp)
+  .post('/signup', Joi.validate(), ctrls.user.signUp)
