@@ -7,7 +7,7 @@ module.exports = {
       if (error) {
         return res.status(400).json(error)
       }
-      else next()
+      next()
     }
   }
 }
