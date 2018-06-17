@@ -12,8 +12,6 @@ module.exports = {
         username,
         password
       })
-
-      await Joi.validate(createdUser, userValidator)
       await createdUser.save()
 
       return res.status(201).json({
