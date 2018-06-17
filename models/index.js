@@ -1,6 +1,6 @@
-const fs = require('fs');
+const fs = require('fs')
 
-const files = {};
+const files = {}
 
 fs
   .readdirSync(__dirname)
@@ -8,6 +8,6 @@ fs
   .forEach(fileName => {
     const modelName = fileName.split('.')[0]
     files[modelName] = require(`./${fileName}`)
-  });
+  })
 
-module.exports = files;
+module.exports = files
