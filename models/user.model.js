@@ -13,6 +13,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String
   }
+}, {
+  timestamps: true
 })
 
 userSchema.pre('save', async function () {
