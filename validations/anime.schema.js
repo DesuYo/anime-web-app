@@ -3,7 +3,8 @@ const Joi = require('joi')
 module.exports = {
   addAnime: Joi.object({
     title: Joi.string().required().max(30).alphanum(),
-    rating: 
+    rating: Joi.number().min(1).max(10),
+
   })
 }
 

@@ -5,9 +5,14 @@ module.exports = {
     return (req, res, next) => {
       const { error } = Joi.validate(req.body, schema)
       if (error) {
-        return res.status(400).json(error)
+        return res.status(400).json(
+          error.details.map(err => ({
+            key: err.context.key,
+            message: err.message
+          }))
+        )
       }
-      else next()
+      next()
     }
   }
 }
