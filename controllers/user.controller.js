@@ -10,9 +10,11 @@ module.exports = {
         username,
         password
       })
-      await createdUser.save()
-
+      const user = await createdUser.save()
+      const result = User.findById(user._id).select('-password')
+      
       return res.status(201).json({
+        createdUser: result,
         message: 'User was saved successfully'
       })
     }
