@@ -19,8 +19,6 @@ module.exports = (sequelize, types) => {
         await bcrypt.hash(user.password, 10)
       }
     }
-  }, {
-    timestamps: true
   })
 
   return userModel
