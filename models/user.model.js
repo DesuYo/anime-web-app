@@ -1,22 +1,27 @@
-const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true
-  },
-  email: {
-    type: String,
-    unique: true
-  },
-  password: String
-}, {
-  timestamps: true
-})
+module.exports = (sequelize, types) => {
+  const { STRING } = types
 
-userSchema.pre('save', async function () {
-  await bcrypt.hash(this.password, 10)
-})
+  const userModel = sequelize.define('user', {
+    username: { 
+      type: STRING, 
+      unique: true 
+    },
+    email: {
+      type: STRING,
+      unique: true
+    },
+    password: STRING
+  }, {
+    hooks: {
+      beforeSave: async user => {
+        await bcrypt.hash(user.password, 10)
+      }
+    }
+  }, {
+    timestamps: true
+  })
 
-module.exports = mongoose.model('User', userSchema)
+  return userModel
+}
