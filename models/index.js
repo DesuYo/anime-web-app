@@ -1,13 +1,21 @@
 const fs = require('fs')
+const Sequelize = require('sequelize')
 
-const files = {}
+const { host, database, username, password } = process.env
+
+const connection = new Sequelize(database, username, password, {
+  host,
+  dialect: 'postgres'
+})
+
+const db = {}
 
 fs
   .readdirSync(__dirname)
   .filter(fileName => fileName !== 'index.js')
   .forEach(fileName => {
     const modelName = fileName.split('.')[0]
-    files[modelName] = require(`./${fileName}`)
+    db[modelName] = connection.import(`./${fileName}`)
   })
 
-module.exports = files
+module.exports = db

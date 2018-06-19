@@ -23,5 +23,3 @@ userSchema.pre('save', async function () {
 })
 
 module.exports = mongoose.model('User', userSchema)
-
-/** just for some changes */
