@@ -1,13 +1,11 @@
-const mongoose = require('mongoose')
+module.exports = (sequelize, types) => {
+  const { STRING, TEXT } = types
 
-const animeSchema = new mongoose.Schema({
-  title: { type: String, unique: true },
-  rating: Number,
-  description: String,
-  thumbnail: { type: String, default: 'default_thumbnail.jpg'},
-  media: [String] 
-}, {
-  timestamps: true
-})
+  const animeModel = sequelize.define('anime', {
+    title: { type: STRING, unique: true },
+    thumbnail: STRING,
+    description: TEXT
+  })
 
-module.exports = mongoose.model('Anime', animeSchema)
+  return animeModel
+}
