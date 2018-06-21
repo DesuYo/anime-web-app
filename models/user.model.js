@@ -12,7 +12,10 @@ module.exports = (sequelize, types) => {
       type: STRING,
       unique: true
     },
-    password: STRING
+    password: STRING,
+    async comparePasswordWith (reqPassword) {
+      return await bcrypt.compare(user.password, reqPassword)
+    }
   }, {
     hooks: {
       beforeSave: async user => {
