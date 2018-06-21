@@ -44,14 +44,13 @@ module.exports = {
         })
       }
 
-      const token = jwt.sign({
-        email: user.email,
+      /*const token = jwt.sign({
         userId: user._id
       },
       process.env.JWT_KEY,
       {
-        expiresIn: "1h"
-      });
+        expiresIn: "3h"
+      });*/
     }
     catch (err) {
       return res.status(500).json({
