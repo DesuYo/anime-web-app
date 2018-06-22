@@ -50,7 +50,7 @@ module.exports = {
       process.env.JWT_KEY,
       {
         expiresIn: "3h"
-      });
+      })
 
       return res.status(200).json({
         message: 'Authorization completed',
