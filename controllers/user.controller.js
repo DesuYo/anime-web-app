@@ -1,4 +1,4 @@
-const db = require('../models/index')
+const { db, Sequelize } = require('../models/index')
 
 module.exports = {
   async signUp (req, res) {
@@ -30,7 +30,7 @@ module.exports = {
     try {
       const { email, username, password } = req.body
 
-      const { Op } = Sequalize
+      const { Op } = Sequelize
       const user = await db['user'].findOne({
         where: { 
           [Op.or]: [{ username }, { email }]
