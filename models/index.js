@@ -18,4 +18,4 @@ fs
     db[modelName] = connection.import(`./${fileName}`)
   })
 
-module.exports = db
+module.exports = { db, Sequelize }
