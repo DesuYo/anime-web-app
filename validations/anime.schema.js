@@ -2,11 +2,16 @@ const Joi = require('joi')
 
 module.exports = {
   addAnime: Joi.object({
+<<<<<<< HEAD
     title: Joi.string().required().max(30),
     votes
     rating: Joi.number().min(1).max(10),
     thumbnail: Joi.string().uri().max(100).default('thumbnail.default.png'),
     description: Joi.string().max(300)
+=======
+    title: Joi.string().required().max(30).alphanum(),
+    rating: 0
+>>>>>>> 52b674f9e439d0ee6c72e802750bd5a9c86870ad
   })
 }
 
