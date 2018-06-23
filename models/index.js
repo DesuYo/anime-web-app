@@ -20,5 +20,5 @@ fs
 
 module.exports = {
   db,
-  Sequalize
+  Sequelize
 }
