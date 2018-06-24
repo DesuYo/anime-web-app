@@ -1,9 +1,5 @@
 module.exports = {
-  user: require('./user.model'),
-<<<<<<< HEAD:models/index.js
-  anime: require('./anime.model')
-}
-=======
+  user: require('./user.init'),
   anime: require('./anime.init')
 }
 
@@ -31,4 +27,3 @@ module.exports = {
   db,
   Sequelize
 }*/
->>>>>>> 0bc016fc04cd61e63fd937581063edb33f50f158:initSQL/index.js
