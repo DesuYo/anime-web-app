@@ -6,6 +6,11 @@ module.exports = {
     title: Joi.string().required().max(50),
     thumbnail: Joi.string().max(50).token().default('thumbnail.default.png'),
     description: Joi.string().max(300)
+  }),
+
+  getList: Joi.object({
+    query: Joi.string().default(''),
+    page: Joi.number().min(1).integer().default(1)
   })
 }
 
