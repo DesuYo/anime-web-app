@@ -1,4 +1,4 @@
-const { db, Sequelize } = require('../models/index')
+//const { db, Sequelize } = require('../models/index')
 
 module.exports = {
   async signUp (req, res) {

@@ -1,6 +1,6 @@
 module.exports = {
   user: require('./user.model'),
-  anime: require('./anime.model')
+  anime: require('./anime.init')
 }
 
 /*const fs = require('fs')
