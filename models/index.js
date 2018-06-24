@@ -15,7 +15,7 @@ fs
   .filter(fileName => fileName !== 'index.js')
   .forEach(fileName => {
     const modelName = fileName.split('.')[0]
-    db[modelName] = connection.import(`./${fileName}`)
+    db[modelName] = connection.import(`${__dirname}/user.model.js`)
   })
 
 module.exports = {
