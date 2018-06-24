@@ -38,8 +38,7 @@ module.exports = {
       text: `SELECT password FROM users WHERE username = $1 OR email = $2`,
       values: [ username, email]
     })).rows[0].password
-    
+
     console.log(modelPassword)
-    return await bcrypt.compare()
   }
 }

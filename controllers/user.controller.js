@@ -19,7 +19,6 @@ module.exports = {
   },
   async logIn (req, res) {
     try {
-      const { username, email, password } = req.body
       User.checkPassword(req.body)
     }
     catch (err) {
