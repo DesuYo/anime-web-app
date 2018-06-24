@@ -1,9 +1,10 @@
 const Joi = require('joi')
 
 module.exports = {
-  validateBody (schema) {
+  validate (schema) {
     return (req, res, next) => {
-      const { error } = Joi.validate(req.body, schema)
+      const { body, query } = req
+      const { error, value } = Joi.validate({ ...body, ...query }, schema)
       if (error) {
         return res.status(400).json(
           error.details.map(err => ({
@@ -12,6 +13,7 @@ module.exports = {
           }))
         )
       }
+      req.payload = value
       next()
     }
   }
