@@ -1,11 +1,11 @@
-const User = require('../models/anime.model')
+const Anime = require('../models/anime.model')
 
 module.exports = {
   async addAnime (req, res) {
     try {
-      await User.init()
-      const user = await User.add(req.body)
-      return res.status(200).json(user)
+      await Anime.init()
+      const anime = await Anime.add(req.body)
+      return res.status(200).json(anime)
     } catch (error) {
       return res.status(500).json({ error })
     }
