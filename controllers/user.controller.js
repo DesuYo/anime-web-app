@@ -1,22 +1,13 @@
-const { db, Sequelize } = require('../models/index')
+const User = require('../models/user.model')
 
 module.exports = {
   async signUp (req, res) {
     try {
-      const { email, username, password } = req.body
-
-      const createdUser = db['user'].build({
-        email,
-        username,
-        password
-      })
-      const user = await createdUser.save()
-      const result = db['user'].findById(user._id, {
-        attributes: { exclude: ['password'] }
-      })
+      await User.init()
+      const createdUser = await User.add(req.body)
       
       return res.status(201).json({
-        createdUser: result,
+        createdUser,
         message: 'User was saved successfully'
       })
     }

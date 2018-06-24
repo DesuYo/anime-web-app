@@ -6,7 +6,7 @@ module.exports = {
   async init() {
     return db.query(`
       CREATE TABLE IF NOT EXISTS user(
-        id SERRIAL PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         username VARCHAR (15) UNIQUE NOT NULL,
         email VARCHAR (50) UNIQUE NOT NULL,
         password VARCHAR (30) NOT NULL 
@@ -16,9 +16,12 @@ module.exports = {
 
   async add (user) {
     const { username, email, password } = user
+    const hashedPassword = await bcrypt.hash(password, 10)
+
     return (await db.query({
-      text: `INSERT INTO user(username, email, password) VALUES($1, $2, $3) RETURNING *`,
-      values: [ username, email, password ]
+      text: `INSERT INTO user(username, email, password) VALUES($1, $2, $3) 
+        RETURNING username, email`,
+      values: [ username, email, hashedPassword ]
     })).rows[0]
   },
 
@@ -27,9 +30,5 @@ module.exports = {
       text: 'SELECT * FROM user WHERE id = $1',
       values: [ id ]
     })).rows[0]
-  },
-
-  async checkPassword (reqPassword) {
-    await bcrypt.hash(reqPassword, 10)
   }
 }
