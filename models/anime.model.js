@@ -3,12 +3,12 @@ const db = require('../connections.pool')
 
 module.exports = {
   async init () {
-    return await db.query(`
-      CREATE TABLE IF NOT EXIST anime(
-        id SERIAL PRIMARY_KEY,
+    return db.query(`
+      CREATE TABLE IF NOT EXISTS anime(
+        id SERIAL PRIMARY KEY,
         slug VARCHAR (50) UNIQUE NOT NULL,
         title VARCHAR (50) UNIQUE NOT NULL,
-        rating INT 
+        rating INT, 
         thumbnail VARCHAR (50),
         description VARCHAR (500),
         media VARCHAR (50) [] 
@@ -19,7 +19,7 @@ module.exports = {
   async add (anime) {
     const { slug, title, thumbnail, description, media } = anime
     return (await db.query({
-      text: 'INSERT INTO anime(title, thumbnail, description, media) VALUES($1, $2, $3, $4, $5) RETURNING *;',
+      text: 'INSERT INTO anime(slug, title, thumbnail, description, media) VALUES($1, $2, $3, $4, $5) RETURNING *;',
       values: [ slug, title, thumbnail, description, media ]
     })).rows[0]
   },

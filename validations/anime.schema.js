@@ -2,9 +2,9 @@ const Joi = require('joi')
 
 module.exports = {
   add: Joi.object({
-    slug: Joi.string().required().max(50).uri(),
+    slug: Joi.string().required().max(50).token(),
     title: Joi.string().required().max(50),
-    thumbnail: Joi.string().uri().max(50).default('thumbnail.default.png'),
+    thumbnail: Joi.string().max(50).token().default('thumbnail.default.png'),
     description: Joi.string().max(300)
   })
 }
