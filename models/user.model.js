@@ -17,7 +17,6 @@ module.exports = {
   async add (user) {
     const { username, email, password } = user
     const hashedPassword = await bcrypt.hash(password, 10)
-    console.log(hashedPassword.length)
 
     return (await db.query({
       text: `INSERT INTO users(username, email, password) VALUES($1, $2, $3) 
@@ -31,5 +30,16 @@ module.exports = {
       text: 'SELECT * FROM users WHERE id = $1',
       values: [ id ]
     })).rows[0]
+  },
+
+  async checkPassword (user) {
+    const { username, email, password } = user
+    const modelPassword = (await db.query({
+      text: `SELECT password FROM users WHERE username = $1 OR email = $2`,
+      values: [ username, email]
+    })).rows[0].password
+    
+    console.log(modelPassword)
+    return await bcrypt.compare()
   }
 }
