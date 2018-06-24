@@ -1,28 +1,35 @@
-/*const bcrypt = require('bcrypt')
+const pg = require('pg')
+const db = require('../connections.pool')
+const bcrypt = require('bcrypt')
 
-module.exports = (sequelize, types) => {
-  const { STRING } = types
+module.exports = {
+  async init() {
+    return db.query(`
+      CREATE TABLE IF NOT EXISTS user(
+        id SERRIAL PRIMARY KEY,
+        username VARCHAR (15) UNIQUE NOT NULL,
+        email VARCHAR (50) UNIQUE NOT NULL,
+        password VARCHAR (30) NOT NULL 
+      )
+    `)
+  },
 
-  const userModel = sequelize.define('user', {
-    username: { 
-      type: STRING, 
-      unique: true 
-    },
-    email: {
-      type: STRING,
-      unique: true
-    },
-    password: STRING,
-    async comparePasswordWith (reqPassword) {
-      return await bcrypt.compare(user.password, reqPassword)
-    }
-  }, {
-    hooks: {
-      beforeSave: async user => {
-        await bcrypt.hash(user.password, 10)
-      }
-    }
-  })
+  async add (user) {
+    const { username, email, password } = user
+    return (await db.query({
+      text: `INSERT INTO user(username, email, password) VALUES($1, $2, $3) RETURNING *`,
+      values: [ username, email, password ]
+    })).rows[0]
+  },
 
-  return userModel
-}*/
+  async getById (id) {
+    return (await db.query({
+      text: 'SELECT * FROM user WHERE id = $1',
+      values: [ id ]
+    })).rows[0]
+  },
+
+  async checkPassword (reqPassword) {
+    await bcrypt.hash(reqPassword, 10)
+  }
+}
