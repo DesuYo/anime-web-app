@@ -1,4 +1,4 @@
-module.exports = (sequelize, types) => {
+/*module.exports = (sequelize, types) => {
   const { INTEGER } = types
 
   const voteModel = sequelize.define('anime', {
@@ -16,7 +16,7 @@ module.exports = (sequelize, types) => {
   }
 
   return voteModel
-}
+}*/
 
 /*const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema.Types

@@ -24,9 +24,5 @@ module.exports = (sequelize, types) => {
     }
   })
 
-<<<<<<< HEAD
-module.exports = mongoose.model('User', userSchema)
-=======
   return userModel
 }
->>>>>>> 52b674f9e439d0ee6c72e802750bd5a9c86870ad

@@ -1,4 +1,9 @@
-const fs = require('fs')
+module.exports = {
+  user: require('./user.model'),
+  anime: require('./anime.model')
+}
+
+/*const fs = require('fs')
 const Sequelize = require('sequelize')
 
 const { host, database, username, password } = process.env
@@ -20,5 +25,5 @@ fs
 
 module.exports = {
   db,
-  Sequalize
-}
+  Sequelize
+}*/
