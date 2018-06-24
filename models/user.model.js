@@ -32,13 +32,21 @@ module.exports = {
     })).rows[0]
   },
 
+  async getId (user) {
+    const { username, email } = user
+    return (await db.query({
+      text: `SELECT id FROM users WHERE username = $1 OR email = $2`,
+      values: [ username, email ]
+    }))
+  },
+
   async checkPassword (user) {
     const { username, email, password } = user
     const modelPassword = (await db.query({
       text: `SELECT password FROM users WHERE username = $1 OR email = $2`,
-      values: [ username, email]
+      values: [ username, email ]
     })).rows[0].password
 
-    console.log(modelPassword)
+    return await bcrypt.compare(modelPassword, password)
   }
 }
