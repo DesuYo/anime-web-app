@@ -20,6 +20,10 @@ module.exports = {
   async logIn (req, res) {
     try {
       User.checkPassword(req.body)
+
+      return res.status(200).json({
+        message: 'Ok'
+      })
     }
     catch (err) {
       return res.status(500).json({
