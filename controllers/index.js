@@ -1,4 +1,9 @@
-const fs = require('fs')
+module.exports = {
+  user: require('./user.controller'),
+  anime: require('./anime.controller')
+}
+
+/*const fs = require('fs')
 
 const files = {}
 
@@ -10,4 +15,4 @@ fs
     files[ctrlName] = require(`./${fileName}`)
   })
 
-module.exports = files
+module.exports = files*/

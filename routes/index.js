@@ -1,9 +1,9 @@
 const { Router } = require('express')
 const ctrls = require('../controllers')
 const validator = require('../services/validation.service')
-const userValidation = require('../validations/user.schema')
+const schemas = require('../validations')
 const auth = require('../services/auth.service')
 
 module.exports = Router()
-  .post('/anime', ctrls.anime.addAnime)
-  .post('/signup', validator.validateBody(userValidation), ctrls.user.signUp)
+  .post('/anime', validator.validateBody(schemas.anime.add), ctrls.anime.addAnime)
+  .post('/signup', validator.validateBody(schemas.user.signUp), ctrls.user.signUp)

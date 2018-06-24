@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+/*const bcrypt = require('bcrypt')
 
 module.exports = (sequelize, types) => {
   const { STRING } = types
@@ -25,4 +25,4 @@ module.exports = (sequelize, types) => {
   })
 
   return userModel
-}
+}*/
