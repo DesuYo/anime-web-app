@@ -1,7 +1,4 @@
-const User = require('../models/user.model')
-
-const pg = require('pg')
-const db = require('../connections.pool')
+//const { db, Sequelize } = require('../models/index')
 
 module.exports = {
   async signUp (req, res) {
@@ -25,7 +22,7 @@ module.exports = {
     try {
       const model = await User.getId(req.body)
       const userId = model.rows[0].id
-      
+
       const checkedPassword = User.checkPassword(req.body)
 
       if (!checkedPassword) {

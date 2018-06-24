@@ -5,6 +5,6 @@ const schemas = require('../validations')
 const auth = require('../services/auth.service')
 
 module.exports = Router()
-  .post('/anime', validator.validateBody(schemas.anime.add), ctrls.anime.addAnime)
+  .post('/anime', validator.validateBody(schemas.anime.add), ctrls.anime.add)
+  .get('/anime', ctrls.anime.getList)
   .post('/signup', validator.validateBody(schemas.user.signUp), ctrls.user.signUp)
-  .post('/login', validator.validateBody(schemas.user.logIn), ctrls.user.logIn)
