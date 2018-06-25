@@ -6,8 +6,7 @@ module.exports = {
   async checkAuth (req, res, next) {
     try {
       const token = req.headers.authorization.split(" ")[1]
-      const decoded = jwt.verify(token, process.env.JWT_KEY)
-      const { id } = decoded
+      const { id } = jwt.verify(token, process.env.JWT_KEY)
 
       const [ user ] = (await db.query({
         text: 'SELECT * FROM users WHERE id = $1',
@@ -23,7 +22,7 @@ module.exports = {
     }
     catch (err) {
       return res.status(401).json({
-        message: 'User not found'
+        message: err.message
       })
     }
   }
