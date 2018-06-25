@@ -9,20 +9,21 @@ module.exports = {
       const decoded = jwt.verify(token, process.env.JWT_KEY)
       const { id } = decoded
 
-      const user = (await db.query({
+      const [ user ] = (await db.query({
         text: 'SELECT * FROM users WHERE id = $1',
         values: [ id ]
       })).rows
 
-      if (user) {
-        req.user = user
+      if (!user) {
+        throw new Error('User not found')
       }
 
+      req.user = user
       next()
     }
     catch (err) {
-      return res.status(500).json({
-        message: err.message
+      return res.status(401).json({
+        message: 'User not found'
       })
     }
   }
