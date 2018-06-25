@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const db = require('../connections.pool')
 const { user } = require('../initSQL')
@@ -8,7 +9,7 @@ module.exports = {
     try {
       await db.query(user)
 
-      const { username, email, password } = req.body
+      const { username, email, password } = req.payload
       const hashedPassword = await bcrypt.hash(password, 10)
 
       const [ createdUser ] = (await db.query({
@@ -31,17 +32,15 @@ module.exports = {
 
   async logIn (req, res) {
     try {
-      const { username, email, password } = req.body
+      const { username, email, password } = req.payload
 
       const [ loggedUser ] = (await db.query({
         text: `SELECT id, password FROM users WHERE username = $1 OR email = $2;`,
         values: [ username, email ]
       })).rows
 
-      const { id } = loggedUser
-      const modelPassword = loggedUser.password
-
-      const checkedPassword = await bcrypt.compare(userPassword, password)
+      const userPassword = loggedUser.password
+      const checkedPassword = await bcrypt.compare(password, userPassword)
 
       if (!checkedPassword) {
         return res.status(401).json({
@@ -49,8 +48,17 @@ module.exports = {
         })
       }
 
+      const { id } = loggedUser
+      const token = jwt.sign({
+        id
+      },
+      process.env.JWT_KEY, {
+        expiresIn: "2h"
+      })
+
       return res.status(200).json({
-        message: userId
+        token,
+        message: 'Authorization successfull'
       })
     }
     catch (err) {
