@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
     })).rows
 
     if (!user) {
-      throw new Error('User not found')
+      throw new Error('User was not found')
     }
 
     req.user = user
