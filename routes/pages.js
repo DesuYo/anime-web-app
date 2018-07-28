@@ -6,3 +6,7 @@ module.exports = Router()
   .get('/', (req, res) => {
     res.render('home', { meta: { title: 'Djo Djo' } })
   })
+
+  .get('/signup', (req, res) => {
+    res.render('signup', { meta: { title: 'Djo Djo' } })
+  })
