@@ -1,4 +1,5 @@
 module.exports = {
+  comments: require('./comments.init'),
   user: require('./user.init'),
   anime: require('./anime.init')
 }
