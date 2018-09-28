@@ -1,6 +1,7 @@
 module.exports = {
   user: require('./user.init'),
-  anime: require('./anime.init')
+  anime: require('./anime.init'),
+  like: require('./like.init')
 }
 
 /*const fs = require('fs')

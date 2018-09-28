@@ -11,3 +11,4 @@ module.exports = Router()
 
   .use(checkAuth)
   .post('/anime', validate(schemas.anime.add), ctrls.anime.add)
+  .get('/likes', validate(schemas.like.getList), ctrls.like.getList)
