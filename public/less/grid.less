@@ -1,0 +1,27 @@
+@grid-size: 12;
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+
+.calc-blocks (@breakpoint-name; @space; @i) when (@i > 0) {
+  .@{breakpoint-name}@{i} {
+    flex: @i 1 auto;
+    margin: @space / 2; 
+  }
+
+  .calc-blocks(@breakpoint-name, @space, @i - 1)
+}
+
+.calc-grid (@breakpoint-name; @space) {
+  .row {
+    display: flex;
+    padding: @space / 2;
+  }
+
+  .calc-blocks(@breakpoint-name, @space, @grid-size)
+}
+
