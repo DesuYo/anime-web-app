@@ -4,6 +4,7 @@ const cors = require('cors')
 const { join } = require('path')
 const pages = require('./routes/pages')
 
+
 module.exports = express()
   .set('view engine', 'pug')
   .set('views', join(__dirname, 'public', 'html'))
