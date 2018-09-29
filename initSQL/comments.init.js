@@ -1,5 +1,5 @@
 module.exports = `
-  CREATE TABLE IF NOT EXIST comments {
+  CREATE TABLE IF NOT EXISTS comments {
     id SERIAL PRIMARY KEY,
     text VARCHAR (300) NOT NULL,
     posted_at TIMESTAMPTZ DEFAULT NOW(),
