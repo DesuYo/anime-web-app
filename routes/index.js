@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const ctrls = require('../controllers')
-const validate = require('../services/validation.service')
 const schemas = require('../validations')
+const validate = require('../services/validation.service')
 const checkAuth = require('../services/auth.service')
 
 module.exports = Router()
