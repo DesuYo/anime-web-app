@@ -2,12 +2,12 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const db = require('../connections.pool')
-const { user } = require('../initSQL')
+const { users } = require('../initSQL')
 
 module.exports = {
   async signUp (req, res) {
     try {
-      await db.query(user)
+      await db.query(users)
 
       const { username, email, password } = req.payload
       const hashedPassword = await bcrypt.hash(password, 10)
