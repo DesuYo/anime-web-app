@@ -2,7 +2,7 @@ const db = require('../connections.pool')
 const { like } = require('../initSQL')
 
 module.exports = {
-  async add (req, res) {
+  async addLike (req, res) {
     try {
 
     } catch (error) {
@@ -16,7 +16,7 @@ module.exports = {
       return res.status(500).json({ error: error.message })
     }
   },
-  async getList (req, res) {
+  async getLikesList (req, res) {
     try {
       const { ownerId, commentId } = req.payload;
 

@@ -7,7 +7,7 @@ module.exports = {
       const { text, animeId } = req.body
       await db.query(comments)
       const [ postedComment ] = (await db.query({
-        text: `INSERT INTO comments (text, anime_id, owner_id) VALUES ($1, $2, $3)`,
+        text: `INSERT INTO comments (text, anime_id, owner_id) VALUES ($1, $2, $3);`,
         values: [text, animeId, req.user.id]
       })).rows
 
