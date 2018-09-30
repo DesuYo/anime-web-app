@@ -12,7 +12,7 @@ module.exports = `
     last_name VARCHAR (25),
     birth_date DATE,
     avatar VARCHAR (100),
-    credentials REFERENCES credentials (id) NOT NULL ON DELETE CASCADE
+    credentials_id REFERENCES credentials (id) NOT NULL ON DELETE CASCADE
   }
 
   CREATE TABLE IF NOT EXISTS anime {
