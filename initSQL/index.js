@@ -1,8 +1,8 @@
 module.exports = {
   comments: require('./comments.init'),
-  user: require('./user.init'),
+  users: require('./users.init'),
   anime: require('./anime.init'),
-  like: require('./like.init')
+  likes: require('./likes.init')
 }
 
 /*const fs = require('fs')

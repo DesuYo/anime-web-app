@@ -1,5 +1,5 @@
 const db = require('../connections.pool')
-const { like } = require('../initSQL')
+const { likes } = require('../initSQL')
 
 module.exports = {
   async addLike (req, res) {

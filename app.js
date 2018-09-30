@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const multer = require('multer')
 const routes = require('./routes')
 
-
 module.exports = express()
   .use(cors())
   .use(bodyParser.json())
