@@ -1,4 +1,3 @@
 module.exports = {
-  user: require('./user.schema'),
-  anime: require('./anime.schema'),
+  users: require('./users.schema')
 }

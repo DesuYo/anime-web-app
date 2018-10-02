@@ -1,21 +1,20 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const db = require('../connections.pool')
-const { user } = require('../initSQL')
+const db = require('../db')
 
 module.exports = {
   async signUp (req, res) {
     try {
-      await db.query(user)
-
-      const { username, email, password } = req.payload
+      const { username, email, password, first_name, last_name, birth_date, avatar } = req.body
       const hashedPassword = await bcrypt.hash(password, 10)
 
       const [ createdUser ] = (await db.query({
-        text: `INSERT INTO users(username, email, password) VALUES($1, $2, $3)
-          RETURNING username, email;`,
-        values: [ username, email, hashedPassword ]
+        text: `WITH cred AS (INSERT INTO credentials (username, email, password) VALUES ($1, $2, $3)
+          RETURNING id)
+          INSERT INTO profiles (first_name, last_name, birth_date, avatar, credentials_id) 
+          VALUES($4, $5, $6, $7, (SELECT id FROM cred)) RETURNING username, email`,
+        values: [ username, email, hashedPassword, first_name, last_name, birth_date, avatar ]
       })).rows
       
       return res.status(201).json({

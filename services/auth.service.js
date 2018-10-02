@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const db = require('../connections.pool')
+const db = require('../db')
 
 module.exports = async (req, res, next) => {
   try {

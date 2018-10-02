@@ -1,9 +1,7 @@
-const mongodb = require('mongodb')
+const { Pool } = require('pg')
 
-module.exports = async () => {
-  const { DB_CONNECTION_URL } = process.env
-  return (await mongodb.connect(DB_CONNECTION_URL)).db()
-}
+const { DB_URL } = process.env
 
- 
-
+module.exports = new Pool({
+  connectionString: DB_URL
+})

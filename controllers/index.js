@@ -1,4 +1,3 @@
 module.exports = {
-  user: require('./user.controller'),
-  anime: require('./anime.controller')
+  users: require('./users.controller')
 }
