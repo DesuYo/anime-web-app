@@ -8,11 +8,11 @@ module.exports = `
 
   CREATE TABLE IF NOT EXISTS profiles (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR (25) NOT NULL,
-    last_name VARCHAR (25) NOT NULL,
+    first_name VARCHAR (25),
+    last_name VARCHAR (25),
     birth_date DATE,
     avatar VARCHAR (100),
-    credentials_id REFERENCES credentials (id) NOT NULL ON DELETE CASCADE
+    credentials_id INT NOT NULL REFERENCES credentials (id) ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS anime (
@@ -27,14 +27,14 @@ module.exports = `
     id SERIAL PRIMARY KEY,
     path VARCHAR (100) NOT NULL,
     order_index INT NOT NULL,
-    anime_id REFERENCES anime (id) NOT NULL ON DELETE CASCADE,
+    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
   );
 
   CREATE TABLE IF NOT EXISTS marks (
     id SERIAL PRIMARY KEY,
     points NUMERIC (4, 2),
-    anime_id REFERENCES anime (id) NOT NULL ON DELETE CASCADE,
-    owner_id REFERENCES profiles (id) NOT NULL ON DELETE CASCADE
+    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
+    owner_id INT NOT NULL REFERENCES profiles (id) ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS genres (
@@ -45,8 +45,8 @@ module.exports = `
 
   CREATE TABLE IF NOT EXISTS anime_genre (
     id SERIAL PRIMARY KEY,
-    anime_id REFERENCES anime (id) NOT NULL ON DELETE CASCADE,
-    genre_id REFERENCES genres (id) NOT NULL ON DELETE CASCADE
+    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
+    genre_id INT NOT NULL REFERENCES genres (id) ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS dubbers (
@@ -56,23 +56,23 @@ module.exports = `
   
   CREATE TABLE IF NOT EXISTS anime_dubbers (
     id SERIAL PRIMARY KEY,
-    anime_id REFERENCES anime (id) NOT NULL ON DELETE CASCADE,
-    dubber_id REFERENCES dubbers (id) NOT NULL ON DELETE CASCADE
+    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
+    dubber_id INT NOT NULL REFERENCES dubbers (id) ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS comments (
     id SERIAL PRIMARY KEY,
     text VARCHAR (300) NOT NULL,
     posted_at TIMESTAMPTZ DEFAULT NOW(),
-    reply_to REFERENCES comments (id) ON DELETE CASCADE, 
-    anime_id REFERENCES anime (id) NOT NULL ON DELETE CASCADE,
-    owner_id REFERENCES profiles (id) NOT NULL ON DELETE CASCADE
+    reply_to INT NOT NULL REFERENCES comments (id) ON DELETE CASCADE, 
+    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
+    owner_id INT NOT NULL REFERENCES profiles (id) ON DELETE CASCADE
   );
-
+  
   CREATE TABLE IF NOT EXISTS likes (
     id SERIAL PRIMARY KEY,
     liked BOOL NOT NULL,
-    comment_id REFERENCES comments (id) NOT NULL ON DELETE CASCADE,
-    owner_id REFERENCES profiles (id) NOT NULL ON DELETE CASCADE
+    comment_id INT NOT NULL REFERENCES comments (id) ON DELETE CASCADE,
+    owner_id INT NOT NULL REFERENCES profiles (id) ON DELETE CASCADE
   );
 `
