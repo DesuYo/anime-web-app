@@ -27,7 +27,7 @@ module.exports = `
     id SERIAL PRIMARY KEY,
     path VARCHAR (100) NOT NULL,
     order_index INT NOT NULL,
-    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
+    anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS marks (
@@ -68,7 +68,7 @@ module.exports = `
     anime_id INT NOT NULL REFERENCES anime (id) ON DELETE CASCADE,
     owner_id INT NOT NULL REFERENCES profiles (id) ON DELETE CASCADE
   );
-  
+
   CREATE TABLE IF NOT EXISTS likes (
     id SERIAL PRIMARY KEY,
     liked BOOL NOT NULL,
