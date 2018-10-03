@@ -3,7 +3,7 @@ module.exports = `
     id SERIAL PRIMARY KEY,
     username VARCHAR (25) UNIQUE NOT NULL,
     email VARCHAR (50) UNIQUE NOT NULL,
-    password VARCHAR (50) NOT NULL
+    password VARCHAR (128) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS profiles (

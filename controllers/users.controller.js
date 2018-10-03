@@ -9,16 +9,16 @@ module.exports = {
       const { username, email, password, first_name, last_name, birth_date, avatar } = req.body
       const hashedPassword = await bcrypt.hash(password, 10)
 
-      const [ createdUser ]  = (await db.query({
+      const { rows }  = await db.query({
         text: `WITH cred AS (INSERT INTO credentials (username, email, password) VALUES ($1, $2, $3)
           RETURNING id)
           INSERT INTO profiles (first_name, last_name, birth_date, avatar, credentials_id) 
-          VALUES($4, $5, $6, $7, (SELECT id FROM cred)) RETURNING first_name, last_name`,
+          VALUES ($4, $5, $6, $7, (SELECT id FROM cred)) RETURNING first_name, last_name`,
         values: [ username, email, hashedPassword, first_name, last_name, birth_date, avatar ]
-      })).rows
+      })
       
       return res.status(201).json({
-        createdUser,
+        rows,
         message: 'User was saved successfully'
       })
     }
